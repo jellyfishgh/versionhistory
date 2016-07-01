@@ -1,0 +1,24 @@
+{
+  "name": "versionhistory",
+  "version": "1.0.0",
+  "description": "version history of app",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jellyfishgh/versionhistory.git"
+  },
+  "keywords": [
+    "frontend",
+    "rending"
+  ],
+  "author": "jellyfishgh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jellyfishgh/versionhistory/issues"
+  },
+  "homepage": "https://github.com/jellyfishgh/versionhistory#readme"
+}
