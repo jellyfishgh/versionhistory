@@ -1,0 +1,94 @@
+html, body, div, ol, li, a {
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+@keyframes ajax-loader-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loading {
+    opacity: .8;
+    display: block;
+    border-radius: 50%;
+    font-size: 29px;
+    width: .25em;
+    height: .25em;
+    box-shadow: 0 -.4em 0 0 rgba(104, 216, 251, 1), -.28em -.28em 0 0 rgba(104, 216, 251, 0.75), -.4em 0 0 0 rgba(104, 216, 251, 0.5), -.28em .28em 0 0 rgba(104, 216, 251, 0.25);
+    animation: .85s ajax-loader-rotate steps(8) infinite;
+}
+.fail{
+    color: gray;
+    font-size: 0.8em;
+    text-align: center;
+}
+.banner {
+    margin: 0.5em auto 0 auto;
+    padding: 0.3em;
+    width: 90%;
+    height: 24px;
+    display: none;
+    z-index: 99;
+    border-radius: 4px;
+    background-color: #ccc;
+    line-height: 24px;
+}
+.banner a {
+    margin-left: 1em;
+}
+.close {
+    float: right;
+    margin-right: 0.2em;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: #fff;
+    background-color: red;
+}
+.container {
+    margin-left: 2%;
+    width: 96%;
+}
+.title {
+    font-size: 2em;
+    margin: 0.5em auto;
+    font-weight: bold;
+}
+.v {
+    margin-bottom: 2em;
+}
+.version {
+    font-size: 1.5em;
+}
+.date {
+    color: #666666;
+    margin-left: 1.5em;
+    font-size: 0.6em;
+}
+.item {
+    line-height: 1.5em;
+    margin-left: 2em;
+}
+.desc {
+    color: rgb(5, 92, 159);
+    margin-top: 0.2em;
+}
