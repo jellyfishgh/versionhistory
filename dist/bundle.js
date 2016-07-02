@@ -1,3 +1,30 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var util = require('./util');
+
+var search = util.parse(location.search.substr(1));
+
+var platform = search.platform ? search.platform : util.whichPlatform(navigator.userAgent),
+    version = search.version;
+
+util.fetch('./' + platform + '.json', function (vs) {
+    if (!version || util.v2n(version) < util.v2n(vs[0].version)) {
+        util.find('banner').style.display = 'block';
+        util.find('download').href = util.getDownloadUrl(platform);
+        util.find('bs3').ontouchend = function (e) {
+            e.stopPropagation();
+            banner.style.display = "none";
+        }
+    }
+    var container = util.find('container');
+    vs.map(function (v) {
+        container.appendChild(util.createVersionView(v));
+    });
+}, function () {
+    util.find('container').innerHTML = "<div class='center fail'>加载失败，请稍后重试。</div>";
+}, function () {
+    util.find('centerDiv').style.display = 'none';
+});
+},{"./util":2}],2:[function(require,module,exports){
 function v2n(v) {
     var ns = v.slice(0, 5).split(".");
     var sum = 0;
@@ -101,3 +128,4 @@ module.exports = {
     getDownloadUrl: getDownloadUrl,
     createVersionView: createVersionView
 };
+},{}]},{},[1]);
