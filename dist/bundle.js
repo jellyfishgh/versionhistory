@@ -13,9 +13,10 @@ util.fetch('./' + platform + '.json', function (vs) {
         util.find('bs3').ontouchend = function (e) {
             e.stopPropagation();
             banner.style.display = "none";
-        }
+        };
     }
     var container = util.find('container');
+    container.appendChild(util.createTitleView(platform));
     vs.map(function (v) {
         container.appendChild(util.createVersionView(v));
     });
@@ -56,9 +57,9 @@ function parse(search) {
 }
 
 function whichPlatform(agent) {
-    if (/iPod|iPad|iPhone/ig.test(agent)) {
+    if (/iPod|iPad|iPhone/i.test(agent)) {
         return 'iOS';
-    } else if (/Android/gi.test(agent)) {
+    } else if (/Android/i.test(agent)) {
         return 'Android';
     }
 }
@@ -66,7 +67,7 @@ function whichPlatform(agent) {
 function fetch(url, resolve, reject, complete) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (this.status == 200) {
                 complete();
@@ -82,16 +83,20 @@ function fetch(url, resolve, reject, complete) {
 
 function getDownloadUrl(platform) {
     if (platform === 'iOS') {
-        return '';
+        return 'https://itunes.apple.com/cn/app/yi-wang-lian-jie-you-xi-nei-wai/id1015325531?l=cn&mt=8';
     } else if (platform === 'Android') {
-        return '';
+        return 'http://im.2980.com:30816/cc/ccplayerand/zhanmeng.apk';
     }
 }
 
-function createTitleView(version, date) {
-    var titleView = create("div", "version", version);
-    titleView.appendChild(create("span", "date", date));
-    return titleView;
+function createTitleView(platform) {
+    return create("div", "title", "战盟 " + platform);
+}
+
+function createTypeView(version, date) {
+    var typeView = create("div", "version", version);
+    typeView.appendChild(create("span", "date", date));
+    return typeView;
 }
 
 function createContentView(content) {
@@ -103,7 +108,7 @@ function createContentView(content) {
 
 function createItemsView(items) {
     var olView = create("ol", "content");
-    items.map(function (item) {
+    items.map(function(item) {
         olView.appendChild(create("li", "item", item));
     });
     return olView;
@@ -111,8 +116,8 @@ function createItemsView(items) {
 
 function createVersionView(v) {
     var versionView = create("div", "v");
-    versionView.appendChild(createTitleView(v.version, v.date));
-    v.contents.map(function (content) {
+    versionView.appendChild(createTypeView(v.version, v.date));
+    v.contents.map(function(content) {
         versionView.appendChild(createContentView(content));
     });
     return versionView;
@@ -126,6 +131,7 @@ module.exports = {
     whichPlatform: whichPlatform,
     fetch: fetch,
     getDownloadUrl: getDownloadUrl,
+    createTitleView: createTitleView,
     createVersionView: createVersionView
 };
 },{}]},{},[1]);

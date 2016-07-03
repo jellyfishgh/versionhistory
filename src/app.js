@@ -12,9 +12,10 @@ util.fetch('./' + platform + '.json', function (vs) {
         util.find('bs3').ontouchend = function (e) {
             e.stopPropagation();
             banner.style.display = "none";
-        }
+        };
     }
     var container = util.find('container');
+    container.appendChild(util.createTitleView(platform));
     vs.map(function (v) {
         container.appendChild(util.createVersionView(v));
     });
