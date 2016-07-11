@@ -9,6 +9,7 @@ var platform = search.platform ? search.platform : util.whichPlatform(navigator.
 util.fetch('./' + platform + '.json', function (vs) {
     if (!version || util.v2n(version) < util.v2n(vs[0].version)) {
         util.find('banner').style.display = 'block';
+        bs1.innerHTML = "有新版本" + vs[0].version;
         util.find('download').href = util.getDownloadUrl(platform);
         util.find('bs3').ontouchend = function (e) {
             e.stopPropagation();
