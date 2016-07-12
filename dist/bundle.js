@@ -86,7 +86,7 @@ function getDownloadUrl(platform) {
     if (platform === 'iOS') {
         return 'https://itunes.apple.com/cn/app/yi-wang-lian-jie-you-xi-nei-wai/id1015325531?l=cn&mt=8';
     } else if (platform === 'Android') {
-        return 'http://im.2980.com:30816/cc/ccplayerand/zhanmeng.apk';
+        return dygame_ver_android.ver_url;
     }
 }
 
