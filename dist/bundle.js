@@ -8,12 +8,14 @@ var platform = search.platform ? search.platform : util.whichPlatform(navigator.
 
 util.fetch('./' + platform + '.json', function (vs) {
     if (!version || util.v2n(version) < util.v2n(vs[0].version)) {
-        util.find('banner').style.display = 'block';
-        bs1.innerHTML = "有新版本" + vs[0].version;
+        var banner = util.find('banner');
+        banner.style.display = 'block';
+        util.find('bs1').innerHTML = '有新版本' + vs[0].version;
         util.find('download').href = util.getDownloadUrl(platform);
-        util.find('bs3').ontouchend = function (e) {
+        util.find('bs3').onclick = function (e) {
+            console.log('touch bs3');
             e.stopPropagation();
-            banner.style.display = "none";
+            banner.style.display = 'none';
         };
     }
     var container = util.find('container');
@@ -22,13 +24,13 @@ util.fetch('./' + platform + '.json', function (vs) {
         container.appendChild(util.createVersionView(v));
     });
 }, function () {
-    util.find('container').innerHTML = "<div class='center fail'>加载失败，请稍后重试。</div>";
+    util.find('container').innerHTML = '<div class="center fail">加载失败，请稍后重试。</div>';
 }, function () {
     util.find('centerDiv').style.display = 'none';
 });
 },{"./util":2}],2:[function(require,module,exports){
 function v2n(v) {
-    var ns = v.slice(0, 5).split(".");
+    var ns = v.slice(0, 5).split('.');
     var sum = 0;
     for (var i = 0; i < ns.length; i++) {
         sum += parseInt(ns[i], 10) * Math.pow(10, ns.length - i - 1);
@@ -48,10 +50,10 @@ function find(id) {
 }
 
 function parse(search) {
-    var qs = search.split("&");
+    var qs = search.split('&');
     var searchJson = {};
     for (var key in qs) {
-        var arr = qs[key].split("=");
+        var arr = qs[key].split('=');
         searchJson[arr[0]] = arr[1];
     }
     return searchJson;
@@ -67,7 +69,7 @@ function whichPlatform(agent) {
 
 function fetch(url, resolve, reject, complete) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
+    xhr.open('GET', url, true);
     xhr.onreadystatechange = function() {
         if (this.readyState == 4) {
             if (this.status == 200) {
@@ -91,32 +93,32 @@ function getDownloadUrl(platform) {
 }
 
 function createTitleView(platform) {
-    return create("div", "title", "战盟 " + platform);
+    return create('div', 'title', '战盟 ' + platform);
 }
 
 function createTypeView(version, date) {
-    var typeView = create("div", "version", version);
-    typeView.appendChild(create("span", "date", date));
+    var typeView = create('div', 'version', version);
+    typeView.appendChild(create('span', 'date', date));
     return typeView;
 }
 
 function createContentView(content) {
-    var contentView = create("div", "descView");
-    contentView.appendChild(create("div", "desc", content.name));
+    var contentView = create('div', 'descView');
+    contentView.appendChild(create('div', 'desc', content.name));
     contentView.appendChild(createItemsView(content.items));
     return contentView;
 }
 
 function createItemsView(items) {
-    var olView = create("ol", "content");
+    var olView = create('ol', 'content');
     items.map(function(item) {
-        olView.appendChild(create("li", "item", item));
+        olView.appendChild(create('li', 'item', item));
     });
     return olView;
 }
 
 function createVersionView(v) {
-    var versionView = create("div", "v");
+    var versionView = create('div', 'v');
     versionView.appendChild(createTypeView(v.version, v.date));
     v.contents.map(function(content) {
         versionView.appendChild(createContentView(content));
